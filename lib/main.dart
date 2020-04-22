@@ -68,24 +68,70 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
+    Widget foodIcon = Image(image: AssetImage('assets/foodIcon.png'),
+      width: 100, height: 100);
+
+    Widget hamburger = Image(image: AssetImage('assets/hamburger.jpg'),
+      width: 200, height: 200);
+
+    Widget pancake = Image(image: AssetImage('assets/pancake.jpeg'),
+      width: 200, height: 200);
+
+    Widget pizza = Image(image: AssetImage('assets/pizza.jpg'),
+      width: 200, height: 200);
+
+    Widget hamburgerText = Text("Hamburger");
+
+      Widget _organiseCards(Widget imageSelected , Widget textSelected){
+         return Card(
+          child: Container(
+            padding: EdgeInsets.all(5.0),
+            child: Row(
+              children: <Widget>[
+                imageSelected ,
+                textSelected ,
+              ],
+            ),
+          ),
+        );
+      }
+
+    Widget _organiseContainers(Widget imageSelected , Widget textSelected){
+      return Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [ Colors.red[300] , Colors.white ]
+          )
+        ),
+        height: 205 ,
+        alignment: Alignment.center,
+        child: _organiseCards(imageSelected , textSelected) ,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [ Colors.red[300] , Colors.white ]
-            )
+      body: ListView(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [ Colors.red[300] , Colors.white ]
+              )
+            ),
+            height: 150 ,
+            alignment: Alignment.center,
+            child:  foodIcon ,
           ),
-          alignment: Alignment.center,
-          child: Text('$counter',
-            style: Theme.of(context)
-            .textTheme
-            .display1 ),
-            //.copyWith(color: Colors.white)),
+          _organiseContainers(hamburger , hamburgerText),
+          _organiseContainers(pancake , hamburgerText),
+          _organiseContainers(pizza , hamburgerText),
+        ],
       ),
 
       floatingActionButton: FloatingActionButton(
