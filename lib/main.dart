@@ -47,18 +47,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
       width: 100, height: 100);
 
     Widget hamburger = Image(image: AssetImage('assets/hamburger.jpg'),
-      width: 200, height: 200);
+      width: 180, height: 180);
 
     Widget pancake = Image(image: AssetImage('assets/pancake.jpeg'),
       width: 200, height: 200);
@@ -81,16 +69,23 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget pizza = Image(image: AssetImage('assets/pizza.jpg'),
       width: 200, height: 200);
 
-    Widget hamburgerText = Text("Hamburger");
+    Widget hamburgerText = Text("Hamburger" , textAlign: TextAlign.center);
+    Widget pancakeText = Text("Pancake" , textAlign: TextAlign.center);
+    Widget pizzaText = Text("Pizza" , textAlign: TextAlign.center);
+
 
       Widget _organiseCards(Widget imageSelected , Widget textSelected){
          return Card(
           child: Container(
-            padding: EdgeInsets.all(5.0),
+            padding: EdgeInsets.all(3.0),
             child: Row(
               children: <Widget>[
-                imageSelected ,
-                textSelected ,
+                Expanded(
+                  child: imageSelected ,
+                ),
+                Expanded(
+                  child: textSelected ,
+                ),
               ],
             ),
           ),
@@ -104,8 +99,8 @@ class _MyHomePageState extends State<MyHomePage> {
             colors: [ Colors.red[300] , Colors.white ]
           )
         ),
-        height: 205 ,
-        alignment: Alignment.center,
+        padding: const EdgeInsets.all(15.0),
+        height: 200 ,
         child: _organiseCards(imageSelected , textSelected) ,
       );
     }
@@ -129,18 +124,10 @@ class _MyHomePageState extends State<MyHomePage> {
             child:  foodIcon ,
           ),
           _organiseContainers(hamburger , hamburgerText),
-          _organiseContainers(pancake , hamburgerText),
-          _organiseContainers(pizza , hamburgerText),
+          _organiseContainers(pancake , pancakeText),
+          _organiseContainers(pizza , pizzaText),
         ],
       ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment', //show when is long pressed
-        splashColor: Colors.purple,
-        child: Icon(Icons.camera_alt),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
