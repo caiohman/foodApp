@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         textTheme: TextTheme(body1 : TextStyle(color : Colors.purple ,
           fontSize: 16)),
       ),
-      home: MyHomePage(title: 'Photos of food'),
+      home: MyHomePage(title: 'Food Recipes'),
     );
   }
 }
@@ -48,6 +48,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  List<String> hamburgerInfos = ["hamburgers" ,
+  "Amazing recipes to fit" ,
+  "everyone`s taste"];
+
+  List<String> pancakeInfos = ["pancake" ,
+  "Amazing recipes to fit" ,
+  "everyone`s taste"];
+
+  List<String> pizzaInfos = ["pizza" ,
+  "Amazing recipes to fit" ,
+  "everyone`s taste"];
+
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -69,38 +82,54 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget pizza = Image(image: AssetImage('assets/pizza.jpg'),
       width: 200, height: 200);
 
-    Widget hamburgerText = Text("Hamburger" , textAlign: TextAlign.center);
-    Widget pancakeText = Text("Pancake" , textAlign: TextAlign.center);
-    Widget pizzaText = Text("Pizza" , textAlign: TextAlign.center);
+    Widget _foodText(List<String> foodInfo){
+      int length = foodInfo.length;
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget> [
+          Text(foodInfo[0] ,
+            style: TextStyle(fontSize: 16 , color: Colors.white)),
+          Text(foodInfo[1] ,
+            style: TextStyle(fontSize: 12 , color: Colors.white)),
+          Text(foodInfo[2] ,
+            style: TextStyle(fontSize: 12 , color: Colors.white)),
+        ],
+      );
+    }
 
-
-      Widget _organiseCards(Widget imageSelected , Widget textSelected){
-         return Card(
-          child: Container(
-            padding: EdgeInsets.all(3.0),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: imageSelected ,
-                ),
-                Expanded(
-                  child: textSelected ,
-                ),
-              ],
-            ),
+    Widget _organiseCards(Widget imageSelected , Widget textSelected){
+       return Card(
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [ Colors.red[400] , Colors.deepOrange[400] ]
+            )
           ),
-        );
-      }
+          padding: EdgeInsets.all(3.0),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: imageSelected ,
+              ),
+              Expanded(
+                child: textSelected ,
+              ),
+            ],
+          ),
+        ),
+      );
+    }
 
     Widget _organiseContainers(Widget imageSelected , Widget textSelected){
       return Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [ Colors.red[300] , Colors.white ]
+            colors: [ Colors.teal[900] , Colors.teal[600] ]
           )
         ),
         padding: const EdgeInsets.all(15.0),
-        height: 200 ,
+        height: 180 ,
         child: _organiseCards(imageSelected , textSelected) ,
       );
     }
@@ -109,23 +138,28 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(widget.title ,
+          style: TextStyle(
+              fontFamily: 'Lobster',
+              fontSize: 24 ,
+          )
+        ),
       ),
       body: ListView(
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [ Colors.red[300] , Colors.white ]
+                colors: [ Colors.teal[900] , Colors.teal[600] ]
               )
             ),
             height: 150 ,
             alignment: Alignment.center,
             child:  foodIcon ,
           ),
-          _organiseContainers(hamburger , hamburgerText),
-          _organiseContainers(pancake , pancakeText),
-          _organiseContainers(pizza , pizzaText),
+          _organiseContainers(hamburger , _foodText(hamburgerInfos)),
+          _organiseContainers(pancake , _foodText(pancakeInfos)),
+          _organiseContainers(pizza , _foodText(pizzaInfos)),
         ],
       ),
     );
